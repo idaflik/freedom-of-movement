@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="utf-8">
+
+    <style>
+
+        #tooltip {
+          font-family: sans-serif;
+          margin-right: 5px;
+          font-size: 14px;
+          position: absolute;
+          display: none;
+          background-color: white;
+          opacity: 0.95;
+          min-width: 80px;
+          max-width: 300px;
+          min-height: auto;
+          /* background: none repeat scroll 0 0 #ffffff; */
+          border: none;
+          padding: 14px;
+          text-align: left;
+          border-radius: 5px;
+          box-shadow: 1px 1px 5px #7f7f7f;
+        }
+
+        #dropdown {
+            margin-bottom: 20px;
+            margin-right: 35px;
+        }
+
+        h3, h5 {
+            margin: 0;
+        }
+
+
+    </style>
+
+    <script src = "https://feyderm.github.io/d3/d3.js"></script>
+    <script src = "countrynames.js"></script>
+
+</head>
+<body>
+
+    <h1>How much of the world is open to you?</h1>
+    <p>Countries you can legally enter without a visa with a passport from <select id="dropdown"></select></p>
+    <!-- dropdown -->
+
+
+    <!-- neighborhood and its value -->
+    <div id = "tooltip">
+    </div>
+
+    <!-- map -->
+    <div id="block"></div>
+
+    <script>
+
+        // populate drop-down
+        d3.select("#dropdown")
+          .selectAll("option")
+          .data(dropdown_options)
+          .enter()
+          .append("option")
+          .attr("value", function(option) { return option.id; })
+          .text(function(option) { return option.name; });
+
+        // initial dataset on load
+        var selected_dataset = "AFG";
+
+        var w = 800,
+            h = 400;
+
+        var svg = d3.select("#block")
+                    .append("svg")
+                    .attr("height", h)
+                    .attr("width", w);
+
+        var toolTip = d3.select("#tooltip")
+
+        var projection = d3.geo.mercator()
+                           .center([0,20])
+                           .scale([120])
+                           // center:
+                           .translate([(w/2), (h/2)]);
+
+        var path = d3.geo.path()
+                     .projection(projection);
+
+        // codes: 0 = visa required = white; 2 = visa on arrival = black; 3 = visa free = black; 1 = pre-enrollment; 9 = own country
+        var fill_viridis = d3.scale.ordinal()
+                             .domain(["0","1","2","3","9"])
+                             .range(["white",
+                             "black",
+                             "black",
+                             "black",
+                             // why does this not work?!
+                             "blue"]);
+
+        // second of two scales for linear fill
+        var norm_fill = d3.scale.linear()
+                          .range([0,1]);
+
+        var geojson = "https://raw.githubusercontent.com/idaflik/data/master/passportindex.geojson";
+
+        d3.json(geojson, function(json) {
+
+            plot = svg.selectAll("path")
+                      .data(json.features)
+                      .enter()
+                      .append("path")
+                      .attr("d", path)
+                      .attr("stroke", "none")
+                      .attr("fill", "white")
+                      .call(updateFill, selected_dataset)
+                      // not sure about tooltip, yet
+                      // .on("mousemove", function(d){
+                      //     toolTip
+                      //       .style("left", d3.event.pageX + "px")
+                      //       .style("top", d3.event.pageY + "px")
+                      //       .style("display", "inline-block")
+                      //       .html((d.properties["name"]))
+                      // })
+                      // .on("mouseout", function(d){ toolTip.style("display", "none");});
+        });
+
+        // dropdown dataset selection
+        var dropDown = d3.select("#dropdown");
+
+        dropDown.on("change", function() {
+
+            selected_dataset = d3.event.target.value;
+            //von d3.select("#dropdown").attr("value", function(option) { return option.id; })
+
+            plot.call(updateFill, selected_dataset)
+
+        });
+
+        function updateFill(selection, selected_dataset) {
+
+           selection.transition()
+                    .duration(700)
+                    .attr("fill", function(d) {
+                         var datum = parseFloat(d.properties[selected_dataset]);
+                         return fill_viridis(datum);
+                    });
+        }
+
+    </script>
+</body>
