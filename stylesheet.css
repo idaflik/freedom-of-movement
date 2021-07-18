@@ -1,0 +1,90 @@
+#tooltip {
+  font-family: sans-serif;
+  margin-right: 5px;
+  font-size: 14px;
+  position: absolute;
+  display: none;
+  background-color: white;
+  opacity: 0.95;
+  min-width: 80px;
+  max-width: 300px;
+  min-height: auto;
+  /* background: none repeat scroll 0 0 #ffffff; */
+  border: none;
+  padding: 14px;
+  text-align: left;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #7f7f7f;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 3.5vw;
+  color: white;
+}
+
+body {
+  font-family: "Archivo";
+  margin: 0px;
+  background-color: #B4C7CD;
+  color: #444;
+}
+
+h1, p {
+  margin-left: 50px;
+}
+
+p {
+  max-width: 50%;
+}
+
+.main-line {
+  max-width: 70%;
+}
+
+h1 {
+  max-width: 70%;
+}
+
+#block{
+  margin-top: 50px;
+}
+
+#dropdown {
+  background-color: #eee;
+  border: 0px solid #444;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: "Archivo";
+  font-size: inherit;
+  color: inherit;
+}
+
+#dropdown > option {
+}
+
+a {
+  color: #478193;
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit;
+}
+
+
+@font-face {
+    font-family: 'Archivo';
+    src: url('Archivo-Bold.woff2') format('woff2'),
+         url('Archivo-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Archivo';
+    src: url('Archivo-Medium.woff2') format('woff2'),
+         url('Archivo Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -2,40 +2,7 @@
 <head>
 
     <meta charset="utf-8">
-
-    <style>
-
-        #tooltip {
-          font-family: sans-serif;
-          margin-right: 5px;
-          font-size: 14px;
-          position: absolute;
-          display: none;
-          background-color: white;
-          opacity: 0.95;
-          min-width: 80px;
-          max-width: 300px;
-          min-height: auto;
-          /* background: none repeat scroll 0 0 #ffffff; */
-          border: none;
-          padding: 14px;
-          text-align: left;
-          border-radius: 5px;
-          box-shadow: 1px 1px 5px #7f7f7f;
-        }
-
-        #dropdown {
-            margin-bottom: 20px;
-            margin-right: 35px;
-        }
-
-        h3, h5 {
-            margin: 0;
-        }
-
-
-    </style>
-
+    <link rel="stylesheet" href="stylesheet.css">
     <script src = "https://feyderm.github.io/d3/d3.js"></script>
     <script src = "countrynames.js"></script>
 
@@ -43,7 +10,7 @@
 <body>
 
     <h1>How much of the world is open to you?</h1>
-    <p>Countries you can legally enter without a visa with a passport from <select id="dropdown"></select></p>
+    <p class="main-line">Countries you can legally enter without a visa with a passport from <select id="dropdown"></select></p>
 
     <div id = "tooltip">
     </div>
@@ -90,14 +57,13 @@
                      .projection(projection);
 
         // codes: 0 = visa required = white; 2 = visa on arrival = black; 3 = visa free = black; 1 = pre-enrollment; 9 = own country
-        var fill_viridis = d3.scale.ordinal()
+        var colorscale = d3.scale.ordinal()
                              .domain(["0","1","2","3","9"])
-                             .range(["white",
-                             "black",
-                             "black",
-                             "black",
-                             // why does this not work?!
-                             "blue"]);
+                             .range(["#B4C7CD",
+                             "#478193",
+                             "#478193",
+                             "#478193",
+                             "#f4f4f4"]);
 
         // second of two scales for linear fill
         var norm_fill = d3.scale.linear()
@@ -112,8 +78,9 @@
                       .enter()
                       .append("path")
                       .attr("d", path)
-                      .attr("stroke", "none")
-                      .attr("fill", "white")
+                      .attr("stroke", "#eee")
+                      .style("stroke-width", 0.3)
+                      .attr("fill", "#B4C7CD")
                       .call(updateFill, selected_dataset)
                       // not sure about tooltip, yet
                       // .on("mousemove", function(d){
@@ -144,7 +111,7 @@
                     .duration(700)
                     .attr("fill", function(d) {
                          var datum = parseFloat(d.properties[selected_dataset]);
-                         return fill_viridis(datum);
+                         return colorscale(datum);
                     });
         }
 
