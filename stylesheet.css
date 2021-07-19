@@ -1,33 +1,16 @@
-#tooltip {
-  font-family: sans-serif;
-  margin-right: 5px;
-  font-size: 14px;
-  position: absolute;
-  display: none;
-  background-color: white;
-  opacity: 0.95;
-  min-width: 80px;
-  max-width: 300px;
-  min-height: auto;
-  /* background: none repeat scroll 0 0 #ffffff; */
-  border: none;
-  padding: 14px;
-  text-align: left;
-  border-radius: 5px;
-  box-shadow: 1px 1px 5px #7f7f7f;
-}
-
 h1 {
   font-weight: bold;
-  font-size: 3.5vw;
+  font-size: 55px;
   color: white;
 }
 
 body {
   font-family: "Archivo";
   margin: 0px;
-  background-color: #B4C7CD;
+  background-color: #c0cbce;
   color: #444;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 h1, p {
@@ -35,19 +18,34 @@ h1, p {
 }
 
 p {
-  max-width: 50%;
+  max-width: 700px;
+}
+
+.category {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline;
+  padding-bottom: 2px;
+  border-bottom: 1px solid;
+  color: white;
+}
+
+.top {
+    margin-top: 60px;
 }
 
 .main-line {
-  max-width: 70%;
+  max-width: 1300px;
+  font-size: 18px;
 }
 
 h1 {
-  max-width: 70%;
+  max-width: 1300px;
+  margin-top: 40px;
 }
 
 #block{
-  margin-top: 50px;
+  margin: 50px;
 }
 
 #dropdown {
@@ -58,13 +56,14 @@ h1 {
   font-family: "Archivo";
   font-size: inherit;
   color: inherit;
+  margin: 10px 0px;
 }
 
 #dropdown > option {
 }
 
 a {
-  color: #478193;
+  color: #2b6070;
   text-decoration: none;
 }
 

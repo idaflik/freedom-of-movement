@@ -14,23 +14,24 @@ geo <- geojson_read("https://raw.githubusercontent.com/johan/world.geo.json/mast
                              what = "sp") %>%
   st_as_sf()
 
-greenland <- geo %>% filter(id == "GRL" | id == "DNK")%>%
-  summarize(id = "DNK", name = "Denmark", geometry = st_union(geometry))
-
-geo_fixed <- geo %>%
-  filter(id != "GRL"  & id != "DNK" & id != "ATA")%>%
-  bind_rows(greenland)
-
-name_id <- geo_fixed %>%
-  st_set_geometry(NULL)
-
-exportJSON <- toJSON(name_id)
-write(exportJSON, "test.json")
-
 data <- read_csv("https://raw.githubusercontent.com/ilyankou/passport-index-dataset/master/legacy/2019-12-17/passport-index-tidy-iso3.csv")%>%
   spread(key = Passport, value = Code)%>%
   mutate(across("AFG":"ZWE", ~replace_na(., 9)))
 
-full <- left_join(geo_fixed, data, by = c("id"="Destination"))
+full <- left_join(geo, data, by = c("id"="Destination"))%>%
+  filter(!is.na(AFG))
 
 geojson_write(full, geometry = "geometry",  file = "passportindex.geojson")
+
+name_id <- full %>%
+  st_set_geometry(NULL) %>%
+  select(id, name)%>%
+  mutate(name = case_when(id == "PSE" ~ "Palestine West Bank",
+                          id == "TZA" ~ "Tanzania",
+                          TRUE ~ name
+                          ))%>%
+  arrange(name)
+
+exportJSON <- str_c("var dropdown_options = ", str_replace_all(as.character(toJSON(name_id)), c('"id":'=' id: ',
+                                                               '"name":'=' name: ')))
+write(exportJSON, "countrynames.js")

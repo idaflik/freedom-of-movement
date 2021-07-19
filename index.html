@@ -8,20 +8,24 @@
 
 </head>
 <body>
-
+    <p class="top"><span class="category">freedom of movement</span></p>
     <h1>How much of the world is open to you?</h1>
-    <p class="main-line">Countries you can legally enter without a visa with a passport from <select id="dropdown"></select></p>
+    <p class="main-line">These are the countries you can legally enter without a visa, with a passport from <select id="dropdown"></select></p>
 
     <div id = "tooltip">
     </div>
 
     <!-- map -->
     <div id="block"></div>
+<p>All states that allow entry without visa (even if the legal stay is limited in time) or offer visa on arrival to those holding the selected passport are colored in on the map. States that don't allow entry without a pre-arranged visa are hidden, respectively. The geography of the selected state is highlighted on the map.</p>
 
-    <p>Source: Passport Index via <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank">ilyankou</a>. Geodata: <a href"" target="_blank">source</a>. </p>
+    <p>Data on visa restrictions: <a href="https://www.passportindex.org/" target="_blank">Passport Index</a> via <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank">ilyankou</a>'s GitHub repo. Geodata from <a href = "https://github.com/johan/world.geo.json" target="_blank">Johan</a> on GitHub.</p>
 
-    <p>Notes: No separate data available for travel restrictions to Greenland - therefore Greenland and Denmark are (wrongly) treated as the same geographical entity. <br>
-    Antarctica is not shown on the map; there are no visa requirements for Antarctica. Ships to Antarctica depart from Argentinia and Chile, though, and regular visa requirements from these countries are applied.</p>
+
+    <p>Credits for inspiration go to an artist (collective) whose name I cannot remember, but who I got this idea from some years ago. They exhibited a series of small world maps for different nationalities depicting only those parts of the world the according passport holders could legally travel to without a visa. If you know or are this artist yourself, let me know and I'll credit you.</p>
+
+    <p>Notes on the data / methodology: <br>
+    Only countries present in the Passport Index' dataset are shown on the map and in the selection menu. Therefore, e.g. Greenland, Antarctica, Puerto Rico and many more are missing.</p>
 
     <script>
 
@@ -59,10 +63,10 @@
         // codes: 0 = visa required = white; 2 = visa on arrival = black; 3 = visa free = black; 1 = pre-enrollment; 9 = own country
         var colorscale = d3.scale.ordinal()
                              .domain(["0","1","2","3","9"])
-                             .range(["#B4C7CD",
-                             "#478193",
-                             "#478193",
-                             "#478193",
+                             .range(["#c0cbce",
+                             "#567f8c",
+                             "#567f8c",
+                             "#567f8c",
                              "#f4f4f4"]);
 
         // second of two scales for linear fill
@@ -80,7 +84,7 @@
                       .attr("d", path)
                       .attr("stroke", "#eee")
                       .style("stroke-width", 0.3)
-                      .attr("fill", "#B4C7CD")
+                      .attr("fill", "#c0cbce")
                       .call(updateFill, selected_dataset)
                       // not sure about tooltip, yet
                       // .on("mousemove", function(d){
