@@ -10,22 +10,26 @@
 <body>
     <p class="top"><span class="category">freedom of movement</span></p>
     <h1>How much of the world is open to you?</h1>
-    <p class="main-line">These are the countries you can legally enter without a visa, with a passport from <select id="dropdown"></select></p>
+    <p>The right to visit different countries hugely varies and depends on ones passport. Conferences, international collaborations, visiting family and friends, international exchange and job opportunities are therefore made possible for some, while others are stopped at the border.</p>
+    <p>Countries you can legally enter without a visa with a passport from <select id="dropdown"></select></p>
 
     <div id = "tooltip">
     </div>
 
     <!-- map -->
     <div id="block"></div>
-    <p>All states that allow entry without visa (even if the legal stay is limited in time) or offer visa on arrival to those holding the selected passport are colored in on the map. States that don't allow entry without a pre-arranged visa are hidden, respectively. The geography of the selected state is highlighted on the map.</p>
+    <div class="small-print">
+      <p>All states that allow entry without visa (including for a limited amount of time) or offer visa on arrival to those holding the selected passport are colored in on the map. States that don't allow entry without a pre-arranged visa are hidden, respectively. The geography of the selected state is highlighted on the map.</p>
 
-    <p>Data on visa restrictions: <a href="https://www.passportindex.org/" target="_blank">Passport Index</a> via <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank">ilyankou</a>'s GitHub repo. In order to disregard Covid-19-related restrictions, the dataset from December 2019 was used. Geodata from <a href = "https://github.com/johan/world.geo.json" target="_blank">Johan</a> on GitHub.</p>
+      <p>Data on visa restrictions: From the <a href="https://www.passportindex.org/" target="_blank">Passport Index</a> via <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank">ilyankou</a>'s GitHub repo. In order to disregard Covid-19-related restrictions, the dataset from December 2019 was used. Geodata from <a href = "https://github.com/johan/world.geo.json" target="_blank">Johan</a> on GitHub.</p>
 
 
-    <p>Credits for inspiration go to an artist (collective) whose name I cannot remember, but who I got this idea from some years ago. They exhibited a series of small world maps for different nationalities depicting only those parts of the world the according passport holders could legally travel to without a visa. If you know or are this artist yourself, let me know and I'll credit you.</p>
+      <p>Credits for inspiration go to an artist (collective) whose name I cannot remember, but who I got this idea from some years ago. They exhibited a series of small world maps for different nationalities depicting only those parts of the world the according passport holders could legally travel to without a visa. If you know or are this artist yourself, let me know and I'll credit you.</p>
 
-    <p>Notes on the data / methodology: <br>
-    Only countries present in the Passport Index' dataset are shown on the map and in the selection menu. Therefore, e.g. Greenland, Antarctica, Puerto Rico and many more are missing.</p>
+      <p>Notes on the data / methodology: <br>
+      Only countries present in the Passport Index' dataset are shown on the map and in the selection menu. Therefore e.g. Greenland, Antarctica, and many more are missing.</p>
+
+    </div>
 
     <script>
 
