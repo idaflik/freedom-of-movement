@@ -4,6 +4,24 @@ h1 {
   color: white;
 }
 
+h2 {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+ul, ol{
+  padding-left: 14px;
+}
+
+ul > * {
+  font-size: inherit;
+}
+
+li {
+  font-size: inherit;
+}
+
 body {
   font-family: "Archivo";
   margin: 0px;
@@ -12,10 +30,28 @@ body {
   line-height: 1.6;
 }
 
-h1, p {
+#paper {
+  background-color: white;
+  padding: 50px 0px;
+}
+
+#paper_content {
+  max-width: 1000px;
+  margin: 50px auto;
+}
+
+#paper > * {
+  margin: 1rem auto;
+}
+
+
+#feature h1, #feature p {
   margin-left: 50px;
 }
 
+#feature {
+padding-bottom:40px;
+}
 
 .category {
   text-transform: uppercase;
@@ -31,7 +67,7 @@ h1, p {
     margin-top: 60px;
 }
 
-p {
+p, ul, ol {
   max-width: 1000px;
   font-size: 18px;
 }
@@ -39,6 +75,17 @@ p {
 .small-print > p {
   max-width: 700px;
   font-size: 14px;
+}
+
+table, figure {
+ width: 70%;
+ margin: 2rem auto;
+}
+
+th, td {
+  padding: 5px;
+  background-color: #e8eced;
+
 }
 
 h1 {
